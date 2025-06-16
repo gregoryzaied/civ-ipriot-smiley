@@ -110,17 +110,18 @@ python3 main.py
 
    | Type                    | name       | value          |
    | ----------              | ---------- | -------------- |
-   | built-in primitive type | BLANK          |  (0,0,0)             |
+   || built-in composite type | BLANK      | (0, 0, 0) |
    | built-in composite type | pixels         |  [(0, 0, 0), (255, 255, 0), ...]           |
    | user-defined type       | sense_hat      |  SenseHat()           |
 
-2. Fill in (`_`) the following table based on the code in `smiley.py`:
+2. Fill in (`_`) the following table based on the code in `smiley.py`: #self.pixels is the attribute not a variable called pixels
 
-   | Object                   | Type                    |
-   | ------------             | ----------------------- |
-   | self.pixels              | list                   |
-   | A member of self.pixels  | tuple                  |
-   | self                     | Smiley                 |
+| Object              | Type  |
+|---------------------|--------|
+| self.pixels         | list   |
+|A member of self.pixels | tuple |
+| self                | Smiley |
+
 
 3. Examine the code for `smiley.py`, `sad.py`, and `happy.py`. Give an example of each of the following control structures using an example from **each** of these files. Include the first line and the line range:
 
@@ -140,7 +141,7 @@ python3 main.py
    | ----------------------- | ----- | --------|
    | int                     | yes     | 0, 255 used in rgb colors         |
    | float                   | yes     | 0.25 used in blink delay          |
-   | str                     | yes     | "mock SenseHAT" in logging          |
+  | str | yes | "eyes open" or "delay" used in function descriptions |
    | bool                    | yes     | True, False (used for eyes)          |
 
 5. Examining `smiley.py`, provide an example of a class variable and an instance variable (attribute). Explain **why** one is defined as a class variable and the other as an instance variable.
@@ -167,7 +168,7 @@ self.pixels is unique per object, each smiley you create gets its own version of
 1. What code style is used in the code? Is it likely to be the same as the code style used in the SenseHat? Give to reasons as to why/why not:
    
 > Your answer here
->The code mainly follows Pep8, which is the official python style guide. It uses clear indentation, lowercase with underscores for function names, and avoids long lines.
+>Even the SenseHat class uses proper snake_case for its public methods like set_pixels() and low_light that matches PEP8. So from the outside it still looks like clean Python code It’s a mock but it follows the standard pretty well
 
 It’s probably not exactly the same as the real Sensehat code because
 1. This code is simplified and written for teaching sensehat’s real codebase would be more complex and optimized.
@@ -238,10 +239,12 @@ Compare and contrast the classes Happy and Sad.
    >The Smiley class is the one that uses the SenseHat. It sets it up and controls what shows on the screen.
 2. Which of these classes directly interact with the SenseHat functionalities?
    > Your answer here
-   >Only the Smiley class talks directly to the SenseHat. The other classes like Happy and Sad just use Smiley’s functions to show stuff.
+   >Smiley is the only one that talks to SenseHat directly, but Happy, Sad, and Angry all use it too because they call `show()`. That method uses the SenseHat behind the scenes, so even though they don’t touch it directly, they’re still using it.
 3. Discuss the hiding of the SenseHAT in terms of encapsulation (100-200 Words)
    > Your answer here
-   >Encapsulation means hiding the complex stuff inside a class so other parts of the code dont need to deal with it. In this project, the SenseHat stuff is hidden inside the Smiley class. Other classes like Happy and Sad don’t have to know how it works. They just call methods like show() to display the smiley. This makes it easier to change how the Sensehat works later, without breaking the rest of the code. It also makes things neater and more organised because only one part of the code handles the hardware.
+   >Abstraction is shown because the other classes don’t need to know how the SenseHat works—they just use `show()` and it handles everything.  
+ Encapsulation is also there because the SenseHat object is kept inside the Smiley class. That stops other classes from messing with it directly and keeps the hardware stuff protected and clean.
+
 
 
 ### Sad Smileys Can’t Blink (Or Can They?)
